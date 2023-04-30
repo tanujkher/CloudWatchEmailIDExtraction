@@ -1,9 +1,11 @@
 import csv
 from logGroupCsvExport import logGroupResultForEmail
+from csvWriter import writeFile
 
 log_group = '/aws/lambda/DataPassFunction'
+fileName = 'EmailIDList.csv'
 
-with open('EmailIDList.csv', mode ='r')as file:
+with open(fileName, mode ='r')as file:
    
   csvFile = csv.reader(file)
 
@@ -22,6 +24,7 @@ with open('EmailIDList.csv', mode ='r')as file:
   if counter:
     for line in emails:
        line[1] = logGroupResultForEmail(line[0], log_group)
-    print(emails)
+    # print(emails)
+    writeFile(fileName, headerArr, emails)
   else:
      print('csv file header should be of the following format ' + str(headerArr))
