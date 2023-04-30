@@ -34,4 +34,4 @@ def logGroupResultForEmail(email, log_group):
             if(field.get('field') == '@message'):
                 response = json.loads(field.get('value')).get('body')
 
-        return response
+        return str(response).replace('\'', '"')
